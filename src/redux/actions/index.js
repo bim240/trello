@@ -5,4 +5,8 @@ function addNewList(listTitle) {
 function deleteList(listTitle) {
   return { type: "DELETE_LIST", payload: listTitle };
 }
-export { addNewList, deleteList };
+
+function addCard(index, card) {
+  return { type: "ADD_CARD", payload: { index, card } };
+}
+export { addNewList, deleteList, addCard };

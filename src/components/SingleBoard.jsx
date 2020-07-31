@@ -2,12 +2,50 @@ import React, { useState, useRef } from "react";
 import { MdDelete, MdAdd } from "react-icons/md";
 import { IoMdClose } from "react-icons/io";
 import { connect } from "react-redux";
-import { addNewList, deleteList } from "../redux/actions";
+import { addNewList, deleteList, addCard } from "../redux/actions";
 
 const SingleBoard = (props) => {
   let [showInputForNewListTitle, setShowInputForNewListTitle] = useState(false);
+  let [showInputForNewCard, setShowInputForNewCard] = useState(false);
   let data = useRef("");
 
+  const showInput = (index) => {
+    return (
+      <div className="add_new_list_section">
+        {showInputForNewListTitle ? (
+          <input
+            className="new_list_title"
+            placeholder={`Enter new title...`}
+            type="text"
+            ref={data}
+            onChange={updateData}
+          />
+        ) : (
+          <textarea
+            ref={data}
+            onChange={updateData}
+            placeholder="Enter a title for this card..."
+            className="new_card_name"></textarea>
+        )}
+
+        <button
+          className="btn_new_title"
+          onClick={() =>
+            showInputForNewCard ? hanldeAddNewCard(index) : handleAddNewList()
+          }>
+          Add {showInputForNewCard ? "Card" : "Title"}
+        </button>
+        <span className="close_icon">
+          <IoMdClose
+            onClick={() => {
+              setShowInputForNewCard(false);
+              setShowInputForNewListTitle(false);
+            }}
+          />
+        </span>
+      </div>
+    );
+  };
   const handleShowInputBox = () => {
     setShowInputForNewListTitle(!showInputForNewListTitle);
   };
@@ -21,6 +59,11 @@ const SingleBoard = (props) => {
     setShowInputForNewListTitle(false);
     data = "";
   };
+  const hanldeAddNewCard = (index) => {
+    props.dispatch(addCard(index, data));
+    setShowInputForNewCard(false);
+    data = "";
+  };
 
   const handleDeletingList = (listTitle) => {
     props.dispatch(deleteList(listTitle));
@@ -31,7 +74,7 @@ const SingleBoard = (props) => {
     <section className="single_board_section">
       <h4 className="signle_board_title"> {nowShowingBoard.name}</h4>
       <div className="all_list">
-        {nowShowingBoard.lists.map((list) => {
+        {nowShowingBoard.lists.map((list, index) => {
           return (
             <div className="single_list">
               <div className="header_section">
@@ -43,11 +86,16 @@ const SingleBoard = (props) => {
               {list.cards.map((card) => {
                 return <div className="single_card">{card}</div>;
               })}
-
-              <div className="add_single_card">
-                {" "}
-                <MdAdd /> Add another card
-              </div>
+              {showInputForNewCard && showInputForNewCard - 1 === index ? (
+                showInput(index)
+              ) : (
+                <div
+                  className="add_single_card"
+                  onClick={() => setShowInputForNewCard(index + 1)}>
+                  {" "}
+                  <MdAdd /> Add another card
+                </div>
+              )}
             </div>
           );
         })}
@@ -56,21 +104,7 @@ const SingleBoard = (props) => {
             showInputForNewListTitle ? "single_list" : "add_single_list"
           }>
           {showInputForNewListTitle ? (
-            <div className="add_new_list_section">
-              <input
-                className="new_list_title"
-                placeholder="Enter new title..."
-                type="text"
-                ref={data}
-                onChange={updateData}
-              />
-              <button className="btn_new_title" onClick={handleAddNewList}>
-                Add List
-              </button>
-              <span className="close_icon">
-                <IoMdClose onClick={handleShowInputBox} />
-              </span>
-            </div>
+            showInput()
           ) : (
             <div className="add_single_card" onClick={handleShowInputBox}>
               {" "}

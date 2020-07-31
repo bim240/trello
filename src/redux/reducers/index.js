@@ -44,6 +44,27 @@ export default function reducer(state = initialState, action) {
           return board;
         }),
       };
+    case "ADD_CARD":
+      return {
+        ...state,
+        boards: state.boards.map((board, i) => {
+          if (i === state.nowShowingBoard) {
+            return {
+              ...board,
+              lists: board.lists.filter((list, i2) => {
+                if (i2 === action.payload.index) {
+                  return {
+                    ...list,
+                    cards: list.cards.push(action.payload.card),
+                  };
+                }
+                return list;
+              }),
+            };
+          }
+          return board;
+        }),
+      };
 
     default:
       return state;
