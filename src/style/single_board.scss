@@ -1,3 +1,8 @@
+.all_list {
+  display: flex;
+  align-items: flex-start;
+}
+
 .single_board_section {
   padding: 0.4rem;
   .signle_board_title {
@@ -7,12 +12,14 @@
     font-weight: 500;
   }
   .single_list {
+    display: inline-block;
     box-sizing: border-box;
     background-color: #ebecf0;
     width: 272px;
     padding: 0.5rem;
     border-radius: 3px;
     color: #172b4d;
+    margin-right: 0.5rem;
     .header_section {
       display: flex;
       justify-content: space-between;
@@ -58,5 +65,55 @@
       background-color: rgba(9, 30, 66, 0.08);
       color: #172b4d;
     }
+  }
+  .add_single_list {
+    display: inline-block;
+    box-sizing: border-box;
+    background-color: #69cd8e;
+    width: 272px;
+    padding: 0.8rem 0.5rem;
+    border-radius: 3px;
+    color: white;
+    margin-right: 0.5rem;
+    transition: all 400ms;
+  }
+  .add_single_list:hover {
+    background-color: #69cd8ead;
+    transition: all 400ms;
+    cursor: pointer;
+  }
+}
+.add_new_list_section {
+  background-color: #ebecf0;
+  color: #172b4d;
+  transition: all 400ms;
+  .new_list_title {
+    box-sizing: border-box;
+    width: 100%;
+    border: 1.5px solid blue;
+    border-radius: 3px;
+    font-size: 1rem;
+    padding: 0.5rem;
+    margin-bottom: 0.2rem;
+  }
+  .new_list_title {
+    outline: none;
+  }
+  .btn_new_title {
+    cursor: pointer;
+    background-color: #5cb147;
+    color: white;
+    border: none;
+    outline: none;
+    padding: 0.5rem;
+    font-size: 1rem;
+    border-radius: 3px;
+  }
+  .close_icon {
+    vertical-align: middle;
+    color: #172b4d;
+    font-size: 1.8rem;
+    margin-left: 0.7rem;
+    cursor: pointer;
   }
 }
