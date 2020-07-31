@@ -2,13 +2,36 @@ import React, { useState, useRef } from "react";
 import { MdDelete, MdAdd } from "react-icons/md";
 import { IoMdClose } from "react-icons/io";
 import { connect } from "react-redux";
-import { addNewList, deleteList, addCard } from "../redux/actions";
+import {
+  addNewList,
+  deleteList,
+  addCard,
+  setBoardNewName,
+} from "../redux/actions";
 
 const SingleBoard = (props) => {
   let [showInputForNewListTitle, setShowInputForNewListTitle] = useState(false);
   let [showInputForNewCard, setShowInputForNewCard] = useState(false);
-  let data = useRef("");
+  let [reNameBoard, setReNameBoard] = useState(false);
+  let [newBoardName, setNewBoardName] = useState(props.nowShowingBoard.name);
 
+  const handleReName = (e) => {
+    if (
+      newBoardName !== props.nowShowingBoard.name &&
+      e.target.className !== "signle_board_title" &&
+      e.target.tagName !== "INPUT" &&
+      e.type === "click"
+    ) {
+      props.dispatch(setBoardNewName(newBoardName));
+      setReNameBoard(false);
+    } else if (e.keyCode === 13) {
+      props.dispatch(setBoardNewName(newBoardName));
+      setReNameBoard(false);
+    }
+  };
+  document.addEventListener("click", handleReName);
+  document.addEventListener("keypress", handleReName);
+  // show input for adding cards and adding list
   const showInput = (index) => {
     return (
       <div className="add_new_list_section">
@@ -72,7 +95,18 @@ const SingleBoard = (props) => {
   let { nowShowingBoard } = props;
   return (
     <section className="single_board_section">
-      <h4 className="signle_board_title"> {nowShowingBoard.name}</h4>
+      <h4 className="signle_board_title" onClick={() => setReNameBoard(true)}>
+        {reNameBoard ? (
+          <input
+            className="new_board_name"
+            type="text"
+            value={newBoardName}
+            onChange={(e) => setNewBoardName(e.target.value)}
+          />
+        ) : (
+          nowShowingBoard.name
+        )}{" "}
+      </h4>
       <div className="all_list">
         {nowShowingBoard.lists.map((list, index) => {
           return (

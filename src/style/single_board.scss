@@ -5,7 +5,22 @@
 
 .single_board_section {
   padding: 0.4rem;
+  .new_board_name {
+    border: none;
+    outline: none;
+    box-sizing: border-box;
+    width: 300px;
+    border: 1.5px solid blue;
+    border-radius: 3px;
+    font-size: 1rem;
+    padding: 0.5rem;
+    margin-bottom: 0.2rem;
+  }
+  .new_board_name:focus {
+    outline: none;
+  }
   .signle_board_title {
+    cursor: pointer;
     color: white;
     padding: 0.5rem;
     font-size: 1.3rem;

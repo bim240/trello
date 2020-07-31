@@ -65,6 +65,19 @@ export default function reducer(state = initialState, action) {
           return board;
         }),
       };
+    case "REMAIN_BOARD":
+      return {
+        ...state,
+        boards: state.boards.map((board, i) => {
+          if (i === state.nowShowingBoard) {
+            return {
+              ...board,
+              name: action.payload,
+            };
+          }
+          return board;
+        }),
+      };
 
     default:
       return state;

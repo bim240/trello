@@ -9,4 +9,8 @@ function deleteList(listTitle) {
 function addCard(index, card) {
   return { type: "ADD_CARD", payload: { index, card } };
 }
-export { addNewList, deleteList, addCard };
+
+function setBoardNewName(newName) {
+  return { type: "REMAIN_BOARD", payload: newName };
+}
+export { addNewList, deleteList, addCard, setBoardNewName };
