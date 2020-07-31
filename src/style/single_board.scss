@@ -1,0 +1,62 @@
+.single_board_section {
+  padding: 0.4rem;
+  .signle_board_title {
+    color: white;
+    padding: 0.5rem;
+    font-size: 1.3rem;
+    font-weight: 500;
+  }
+  .single_list {
+    box-sizing: border-box;
+    background-color: #ebecf0;
+    width: 272px;
+    padding: 0.5rem;
+    border-radius: 3px;
+    color: #172b4d;
+    .header_section {
+      display: flex;
+      justify-content: space-between;
+      // margin-bottom: 0.5rem;
+      font-weight: 500;
+      font-size: 0.9rem;
+      padding: 0.5rem 0 0.5rem 0.5rem;
+      .list_title {
+        cursor: pointer;
+      }
+      .delete_icon {
+        font-size: 1.1rem;
+        cursor: pointer;
+      }
+      .delete_icon:hover {
+        color: #172b4dbb;
+      }
+    }
+    .single_card {
+      background-color: #ffffff;
+      padding: 0.6rem;
+      border-radius: 3px;
+      box-shadow: 0 1px 0 rgba(9, 30, 66, 0.25);
+      margin-bottom: 0.4rem;
+      font-size: 0.9rem;
+      transition: all 200ms;
+    }
+    .single_card:hover {
+      cursor: pointer;
+      background-color: #ffffff7a;
+      transition: all 200ms;
+    }
+    .add_single_card {
+      padding: 0.5rem 0 0.5rem 0.5rem;
+
+      font-size: 0.95rem;
+      color: #7b8597;
+      vertical-align: middle;
+      border-radius: 3px;
+    }
+    .add_single_card:hover {
+      cursor: pointer;
+      background-color: rgba(9, 30, 66, 0.08);
+      color: #172b4d;
+    }
+  }
+}
