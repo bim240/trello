@@ -13,6 +13,7 @@ const SingleBoard = (props) => {
   let [showInputForNewListTitle, setShowInputForNewListTitle] = useState(false);
   let [showInputForNewCard, setShowInputForNewCard] = useState(false);
   let [reNameBoard, setReNameBoard] = useState(false);
+  let data = useRef("");
   let [newBoardName, setNewBoardName] = useState(props.nowShowingBoard.name);
 
   const handleReName = (e) => {
