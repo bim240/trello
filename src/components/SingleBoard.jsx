@@ -2,7 +2,7 @@ import React, { useState, useRef } from "react";
 import { MdDelete, MdAdd } from "react-icons/md";
 import { IoMdClose } from "react-icons/io";
 import { connect } from "react-redux";
-import { addNewList } from "../redux/actions";
+import { addNewList, deleteList } from "../redux/actions";
 
 const SingleBoard = (props) => {
   let [showInputForNewListTitle, setShowInputForNewListTitle] = useState(false);
@@ -22,6 +22,10 @@ const SingleBoard = (props) => {
     data = "";
   };
 
+  const handleDeletingList = (listTitle) => {
+    props.dispatch(deleteList(listTitle));
+  };
+
   let { nowShowingBoard } = props;
   return (
     <section className="single_board_section">
@@ -31,13 +35,12 @@ const SingleBoard = (props) => {
           return (
             <div className="single_list">
               <div className="header_section">
-                <h5 className="list_title">{list.name}</h5>
-                <div>
+                <h5 className="list_title">{list.title}</h5>
+                <div onClick={() => handleDeletingList(list.title)}>
                   <MdDelete className="delete_icon" />
                 </div>
               </div>
               {list.cards.map((card) => {
-                console.log(card, "cards");
                 return <div className="single_card">{card}</div>;
               })}
 
@@ -81,7 +84,6 @@ const SingleBoard = (props) => {
 };
 
 function mapStateToProps(state) {
-  // console.log(state.nowShowingBoard, "nowShowingBoard");
   return {
     nowShowingBoard: state.boards[state.nowShowingBoard],
   };

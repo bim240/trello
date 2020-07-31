@@ -1,11 +1,11 @@
 let initialState = {
   boards: [
     {
-      name: " Kubric UI",
+      name: "Kubric UI",
       lists: [
-        { name: "Backlog", cards: ["testing1", "testing2", "testing3"] },
+        { title: "Backlog", cards: ["testing1", "testing2", "testing3"] },
         {
-          name: "Prioritized",
+          title: "Prioritized",
           cards: ["testing1", "testing2", "testing3", "testing3", "testing4"],
         },
       ],
@@ -19,10 +19,29 @@ export default function reducer(state = initialState, action) {
     case "ADD_NEW_LIST":
       return {
         ...state,
-        ...state.boards[state.nowShowingBoard],
-        lists: state.boards[state.nowShowingBoard].lists.push({
-          name: action.payload,
-          cards: [],
+        boards: state.boards.map((board, i) => {
+          if (i === state.nowShowingBoard) {
+            return {
+              ...board,
+              lists: board.lists.concat({ title: action.payload, cards: [] }),
+            };
+          }
+          return board;
+        }),
+      };
+    case "DELETE_LIST":
+      return {
+        ...state,
+        boards: state.boards.map((board, i) => {
+          if (i === state.nowShowingBoard) {
+            return {
+              ...board,
+              lists: board.lists.filter(
+                (list) => list.title !== action.payload
+              ),
+            };
+          }
+          return board;
         }),
       };
 
