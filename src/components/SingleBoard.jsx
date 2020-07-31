@@ -24,7 +24,10 @@ const SingleBoard = (props) => {
     ) {
       props.dispatch(setBoardNewName(newBoardName));
       setReNameBoard(false);
-    } else if (e.keyCode === 13) {
+    } else if (
+      newBoardName !== props.nowShowingBoard.name &&
+      e.keyCode === 13
+    ) {
       props.dispatch(setBoardNewName(newBoardName));
       setReNameBoard(false);
     }
