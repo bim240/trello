@@ -9,7 +9,7 @@ function Wrapper(ui) {
   return <Provider store={store}>{ui}</Provider>;
 }
 
-test("testing add a new card ", () => {
+test("testing click event on board title ", () => {
   const { container, getByText, getAllByText } = render(
     Wrapper(<SingleBoard />)
   );
