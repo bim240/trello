@@ -1,8 +1,14 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import "./style/style.scss";
+import "./style/main.scss";
 import App from "./App";
+import { Provider } from "react-redux";
 
-const template = <p>Hello from react</p>;
+import { store } from "./redux";
 
-ReactDOM.render(<App />, document.getElementById("root"));
+ReactDOM.render(
+  <Provider store={store}>
+    <App />
+  </Provider>,
+  document.getElementById("root")
+);

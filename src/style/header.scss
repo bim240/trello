@@ -1,0 +1,18 @@
+.header_container {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  background-color: #4aa35b;
+  height: 2.5rem;
+  img {
+    box-sizing: border-box;
+    height: 100%;
+    opacity: 0.6;
+    padding: 0.3rem;
+    width: 5.5rem;
+  }
+  img:hover {
+    opacity: 0.8;
+    cursor: pointer;
+  }
+}
