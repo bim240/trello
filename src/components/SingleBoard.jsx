@@ -25,13 +25,14 @@ const SingleBoard = (props) => {
     // diaptch for renaming board name
     if (
       newBoardName &&
+      reNameBoard &&
       e.target.className !== "single_board_title" &&
       e.target.tagName !== "INPUT" &&
       e.type === "click"
     ) {
       props.dispatch(setBoardNewName(newBoardName));
       setReNameBoard(false);
-    } else if (newBoardName && e.keyCode === 13) {
+    } else if (newBoardName && e.keyCode === 13 && reNameBoard) {
       props.dispatch(setBoardNewName(newBoardName));
       setReNameBoard(false);
     }
