@@ -19,7 +19,7 @@
   .new_board_name:focus {
     outline: none;
   }
-  .signle_board_title {
+  .single_board_title {
     cursor: pointer;
     color: white;
     padding: 0.5rem;
@@ -148,4 +148,20 @@
     color: #172b4d;
     font-size: 0.9rem;
   }
+}
+.input_box_for_renaming_list_titile {
+  border: none;
+  outline: none;
+  box-sizing: border-box;
+  width: 90%;
+  border: 1.5px solid blue;
+  border-radius: 3px;
+  font-size: 0.9rem;
+  padding: 0.2rem;
+  transition: all 400ms;
+  // margin-bottom: 0.2rem;
+}
+.input_box_for_renaming_list_titile:focus {
+  outline: none;
+  transition: all 400ms;
 }

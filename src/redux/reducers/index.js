@@ -65,7 +65,7 @@ export default function reducer(state = initialState, action) {
           return board;
         }),
       };
-    case "REMAIN_BOARD":
+    case "RENAME_BOARD":
       return {
         ...state,
         boards: state.boards.map((board, i) => {
@@ -73,6 +73,24 @@ export default function reducer(state = initialState, action) {
             return {
               ...board,
               name: action.payload,
+            };
+          }
+          return board;
+        }),
+      };
+    case "RENAME_LIST":
+      return {
+        ...state,
+        boards: state.boards.map((board, i) => {
+          if (i === state.nowShowingBoard) {
+            return {
+              ...board,
+              lists: board.lists.map((list, i) => {
+                if (i === action.payload.index) {
+                  return { ...list, title: action.payload.newName };
+                }
+                return list;
+              }),
             };
           }
           return board;

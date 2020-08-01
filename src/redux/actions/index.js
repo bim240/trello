@@ -11,6 +11,11 @@ function addCard(index, card) {
 }
 
 function setBoardNewName(newName) {
-  return { type: "REMAIN_BOARD", payload: newName };
+  return { type: "RENAME_BOARD", payload: newName };
 }
-export { addNewList, deleteList, addCard, setBoardNewName };
+
+function setListNewName(newName, index) {
+  return { type: "RENAME_LIST", payload: { newName, index } };
+}
+
+export { addNewList, deleteList, addCard, setBoardNewName, setListNewName };

@@ -7,32 +7,54 @@ import {
   deleteList,
   addCard,
   setBoardNewName,
+  setListNewName,
 } from "../redux/actions";
 
 const SingleBoard = (props) => {
   let [showInputForNewListTitle, setShowInputForNewListTitle] = useState(false);
   let [showInputForNewCard, setShowInputForNewCard] = useState(false);
   let [reNameBoard, setReNameBoard] = useState(false);
-  let data = useRef("");
   let [newBoardName, setNewBoardName] = useState(props.nowShowingBoard.name);
+  let data = useRef("");
+  let [showInputForReNameOfList, setShowInputForReNameOfList] = useState("");
+  let [newListName, setNewListName] = useState("");
 
   const handleReName = (e) => {
+    // diaptch for renaming board name
     if (
-      newBoardName !== props.nowShowingBoard.name &&
-      e.target.className !== "signle_board_title" &&
+      newBoardName &&
+      e.target.className !== "single_board_title" &&
       e.target.tagName !== "INPUT" &&
       e.type === "click"
     ) {
       props.dispatch(setBoardNewName(newBoardName));
       setReNameBoard(false);
-    } else if (
-      newBoardName !== props.nowShowingBoard.name &&
-      e.keyCode === 13
-    ) {
+    } else if (newBoardName && e.keyCode === 13) {
       props.dispatch(setBoardNewName(newBoardName));
       setReNameBoard(false);
     }
+    // dispatch for remaning list
+
+    if (
+      newListName &&
+      showInputForReNameOfList &&
+      e.target.className !== "input_box_for_renaming_list_titile" &&
+      e.target.className !== "list_title" &&
+      e.target.tagName !== "INPUT" &&
+      e.type === "click"
+    ) {
+      props.dispatch(setListNewName(newListName, showInputForReNameOfList - 1));
+      newListName = "";
+      showInputForReNameOfList = false;
+      setShowInputForReNameOfList(false);
+      setNewListName("");
+    } else if (newBoardName && e.keyCode === 13 && showInputForReNameOfList) {
+      props.dispatch(setListNewName(newListName, showInputForReNameOfList - 1));
+      setShowInputForReNameOfList(false);
+      setNewListName("");
+    }
   };
+
   document.addEventListener("click", handleReName);
   document.addEventListener("keypress", handleReName);
   // show input for adding cards and adding list
@@ -78,18 +100,18 @@ const SingleBoard = (props) => {
   };
 
   const updateData = (e) => {
-    data = e.target.value;
+    data.current = e.target.value;
   };
 
   const handleAddNewList = () => {
-    props.dispatch(addNewList(data));
+    props.dispatch(addNewList(data.current));
     setShowInputForNewListTitle(false);
-    data = "";
+    data.current = "";
   };
   const hanldeAddNewCard = (index) => {
-    props.dispatch(addCard(index, data));
+    props.dispatch(addCard(index, data.current));
     setShowInputForNewCard(false);
-    data = "";
+    data.current = "";
   };
 
   const handleDeletingList = (listTitle) => {
@@ -99,7 +121,7 @@ const SingleBoard = (props) => {
   let { nowShowingBoard } = props;
   return (
     <section className="single_board_section">
-      <h4 className="signle_board_title" onClick={() => setReNameBoard(true)}>
+      <h4 className="single_board_title" onClick={() => setReNameBoard(true)}>
         {reNameBoard ? (
           <input
             className="new_board_name"
@@ -116,7 +138,24 @@ const SingleBoard = (props) => {
           return (
             <div className="single_list">
               <div className="header_section">
-                <h5 className="list_title">{list.title}</h5>
+                {showInputForReNameOfList &&
+                showInputForReNameOfList - 1 === index ? (
+                  <input
+                    className="input_box_for_renaming_list_titile"
+                    type="text"
+                    value={newListName}
+                    onChange={(e) => setNewListName(e.target.value)}
+                  />
+                ) : (
+                  <h5
+                    className="list_title"
+                    onClick={() => {
+                      setShowInputForReNameOfList(index + 1);
+                      setNewListName(list.title);
+                    }}>
+                    {list.title}
+                  </h5>
+                )}
                 <div onClick={() => handleDeletingList(list.title)}>
                   <MdDelete className="delete_icon" />
                 </div>
