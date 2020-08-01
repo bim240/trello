@@ -22,9 +22,16 @@
 All the above features and UI are the same as the original Trello app.
 
 - Local storage to store all the data
-- Redux for all state changes.
+- Redux(action, reducer, store) as a single source of truth.
 
 ---
+
+## How to make it more like Trello
+
+- React window npm package for horizontal scrolling.
+- React DND npm package to move cards between lists.
+- Adding service worker for offline loading and also to make it a PWA.
+  and so it can be improved further
 
 ## Available Scripts
 
