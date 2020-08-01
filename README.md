@@ -51,5 +51,5 @@ Launches the test runner in the interactive watch mode.
 
 ### `npm run build`
 
-Builds the app for production serves it.
+Builds the app for production and serves it.
 Open http://localhost:8080 to view it in the browser.
