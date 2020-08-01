@@ -7,7 +7,7 @@
 5. React-redux
 6. Node-sass
 
-- no css third library no create-react-app
+- no css third party library, no create-react-app
 
 ---
 
@@ -30,8 +30,8 @@ All the above features and UI are the same as the original Trello app.
 
 - React window npm package for horizontal scrolling.
 - React DND npm package to move cards between lists.
-- Adding service worker for offline loading and also to make it a PWA.
-  and so it can be improved further
+- Adding service worker for offline loading and also to make it a PWA,
+  and so it can be improved further.
 
 ## Available Scripts
 
