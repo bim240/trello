@@ -1,4 +1,4 @@
-let initialState = {
+let initialState = JSON.parse(localStorage.getItem(["state"])) || {
   boards: [
     {
       name: "Kubric UI",

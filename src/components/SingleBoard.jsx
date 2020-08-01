@@ -195,6 +195,7 @@ const SingleBoard = (props) => {
 };
 
 function mapStateToProps(state) {
+  localStorage.setItem("state", JSON.stringify(state));
   return {
     nowShowingBoard: state.boards[state.nowShowingBoard],
   };
