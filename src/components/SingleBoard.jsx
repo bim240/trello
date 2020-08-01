@@ -2,6 +2,8 @@ import React, { useState, useRef } from "react";
 import { MdDelete, MdAdd } from "react-icons/md";
 import { IoMdClose } from "react-icons/io";
 import { connect } from "react-redux";
+import { v4 as uuid } from "uuid";
+
 import {
   addNewList,
   deleteList,
@@ -136,7 +138,7 @@ const SingleBoard = (props) => {
       <div className="all_list">
         {nowShowingBoard.lists.map((list, index) => {
           return (
-            <div className="single_list">
+            <div className="single_list" key={uuid()}>
               <div className="header_section">
                 {showInputForReNameOfList &&
                 showInputForReNameOfList - 1 === index ? (
@@ -161,7 +163,11 @@ const SingleBoard = (props) => {
                 </div>
               </div>
               {list.cards.map((card) => {
-                return <div className="single_card">{card}</div>;
+                return (
+                  <div className="single_card" key={uuid()}>
+                    {card}
+                  </div>
+                );
               })}
               {showInputForNewCard && showInputForNewCard - 1 === index ? (
                 showInput(index)
